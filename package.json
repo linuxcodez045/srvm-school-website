@@ -4,7 +4,10 @@
   "private":true,
   "description":"SRVM school website - Vercel + MongoDB Atlas + Cloudinary",
   "main":"server.js",
-  "scripts":{"start":"node server.js"},
+  "scripts":{
+    "start": "node server.js",
+  "build": "npm install"
+},
   "dependencies":{
     "cloudinary":"^2.7.0",
     "dotenv":"^17.2.1",
