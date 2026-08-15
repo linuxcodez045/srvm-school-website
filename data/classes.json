@@ -1,0 +1,60 @@
+{
+  "classes": [
+    {
+      "name": "Nursery",
+      "enabled": true
+    },
+    {
+      "name": "UKG",
+      "enabled": true
+    },
+    {
+      "name": "Class I",
+      "enabled": true
+    },
+    {
+      "name": "Class II",
+      "enabled": true
+    },
+    {
+      "name": "Class III",
+      "enabled": true
+    },
+    {
+      "name": "Class IV",
+      "enabled": true
+    },
+    {
+      "name": "Class V",
+      "enabled": true
+    },
+    {
+      "name": "Class VI",
+      "enabled": true
+    },
+    {
+      "name": "Class VII",
+      "enabled": true
+    },
+    {
+      "name": "Class VIII",
+      "enabled": true
+    },
+    {
+      "name": "Class IX",
+      "enabled": false
+    },
+    {
+      "name": "Class X",
+      "enabled": false
+    },
+    {
+      "name": "Class XI",
+      "enabled": false
+    },
+    {
+      "name": "Class XII",
+      "enabled": false
+    }
+  ]
+}

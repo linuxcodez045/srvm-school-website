@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "icon": "01",
+    "title": "Library",
+    "text": "A quiet reading space with books for every age."
+  },
+  {
+    "id": 2,
+    "icon": "02",
+    "title": "Science & Computer Labs",
+    "text": "Hands-on experiments and digital learning."
+  },
+  {
+    "id": 3,
+    "icon": "03",
+    "title": "Sports Ground",
+    "text": "Cricket, athletics, kho-kho and team activities."
+  },
+  {
+    "id": 4,
+    "icon": "04",
+    "title": "Arts & Culture",
+    "text": "Music, art, stage activities and cultural expression."
+  },
+  {
+    "id": 5,
+    "icon": "05",
+    "title": "Transport",
+    "text": "Safe routes with attendants for students."
+  },
+  {
+    "id": 6,
+    "icon": "06",
+    "title": "Health & Counselling",
+    "text": "First-response care and student support."
+  }
+]

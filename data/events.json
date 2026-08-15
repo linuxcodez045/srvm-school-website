@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "date": "2026-08-19",
+    "title": "Inter-House Sports Meet",
+    "description": "School Ground \u2022 8:30 AM",
+    "tag": "Sports"
+  },
+  {
+    "id": 2,
+    "date": "2026-08-28",
+    "title": "Science Exhibition",
+    "description": "Innovation Lab \u2022 10:00 AM",
+    "tag": "Academic"
+  }
+]

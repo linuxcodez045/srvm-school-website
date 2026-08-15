@@ -1,0 +1,46 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SRVM Admin</title><link rel="stylesheet" href="/admin/admin.css"></head><body>
+<div id="login"><div class="loginbox"><a class="back-site" href="/">← Back to School Website</a><div class="logo">SRVM</div><h1>School Admin</h1><p>Manage admissions, contacts and website content.</p><div id="loginPanel"><input id="username" value="admin" autocomplete="username"><input id="password" type="password" placeholder="Password" autocomplete="current-password"><button onclick="login()">Login</button><button class="forgot-link" type="button" onclick="showForgotPassword()">Forgot Password?</button><div id="loginMsg"></div></div><div id="forgotPanel" class="hidden"><h2>Reset Admin Password</h2><p>Enter your admin username, recovery code and a new password.</p><input id="recoveryUsername" value="admin" autocomplete="username"><input id="recoveryCode" type="password" placeholder="Recovery code" autocomplete="off"><input id="resetPassword" type="password" placeholder="New password" autocomplete="new-password"><input id="resetPasswordConfirm" type="password" placeholder="Confirm new password" autocomplete="new-password"><button type="button" onclick="resetForgotPassword()">Reset Password</button><button class="forgot-link" type="button" onclick="showLoginPanel()">← Back to Login</button><div id="forgotMsg"></div></div></div></div>
+<div id="app" class="hidden"><aside><div class="adminbrand"><b>SRVM</b><small>School Management</small></div><button onclick="show('dashboard')">⌂ Dashboard</button><button onclick="show('school')">🏫 School Data</button><button onclick="show('admissions')">📝 Admission Data <i id="admCount">0</i></button><button onclick="show('contacts')">☎ Contact Messages <i id="conCount">0</i></button><button onclick="show('events')">📅 Events</button><button onclick="show('facilities')">✦ Facilities</button><button onclick="show('classes')">🎓 Class Management</button><button onclick="show('gallery')">📷 Photos</button><button onclick="show('security')">🔐 Admin Password</button><a href="/" target="_blank">🌐 View Website</a><button onclick="logout()">↪ Logout</button></aside>
+<main><header><h1 id="pageTitle">Dashboard</h1><span id="saveStatus"></span></header>
+<section id="dashboard" class="page"><div class="cards"><div><small>Admission enquiries</small><b id="dashAdm">0</b></div><div><small>Contact messages</small><b id="dashCon">0</b></div><div><small>Students</small><b id="dashStudents">0</b></div></div><div class="welcome"><h2>Everything important is here.</h2><p>When a parent submits the live Admission or Contact form, the information appears in this panel automatically.</p></div></section>
+<section id="school" class="page hidden"><div class="panel"><form id="schoolForm"></form><div class="social-help">Add full links for the school social pages. Leave a field empty if the school does not use that platform. These links appear automatically in the public website footer.</div><button class="save" onclick="saveSchool()">Save School Information</button></div></section>
+<section id="admissions" class="page hidden"><div class="toolbar"><button onclick="refresh()">↻ Refresh</button><button onclick="exportCSV('admissions')">Export CSV</button></div><div id="admissionTable"></div></section>
+<section id="contacts" class="page hidden"><div class="toolbar"><button onclick="refresh()">↻ Refresh</button><button onclick="exportCSV('contacts')">Export CSV</button></div><div id="contactTable"></div></section>
+<section id="events" class="page hidden"><button class="add" onclick="addEvent()">+ Add Event</button><div id="eventsTable"></div></section>
+<section id="facilities" class="page hidden"><button class="add" onclick="addFacility()">+ Add Facility</button><div id="facilitiesTable"></div></section>
+<section id="classes" class="page hidden">
+  <div class="panel class-management">
+    <div class="eyebrow">ACADEMIC SETTINGS</div>
+    <h2>Class Management</h2>
+    <p>Classes 9–12 are currently hidden from the public website. Enable a class here when the school is ready to offer admissions for it.</p>
+    <div id="classManager" class="class-manager"></div>
+    <button class="save" onclick="saveClasses()">Save Class Settings</button>
+    <div id="classMsg" class="msg"></div>
+  </div>
+</section>
+<section id="gallery" class="page hidden">
+  <div class="panel">
+    <h2>Website Photos</h2>
+    <p>Upload event/campus photos here. You can also choose any uploaded photo as the main About-section image.</p>
+    <form id="photoForm" onsubmit="uploadPhoto(event)">
+      <label>Photo <input id="photoFile" type="file" accept="image/png,image/jpeg,image/webp" required></label>
+      <label>Title <input id="photoTitle" placeholder="Annual Sports Day"></label>
+      <label class="full">Caption <input id="photoCaption" placeholder="Students during the sports meet"></label>
+      <button class="save" type="submit">Upload Photo</button>
+      <span id="photoMsg"></span>
+    </form>
+  </div>
+  <div id="galleryTable"></div>
+</section>
+<section id="security" class="page hidden"><div class="panel security-panel"><div class="eyebrow">SECURITY</div><h2>Change Admin Password</h2><p>Change the password used to enter this admin panel. Your new password is stored by the server and will be required on the next login.</p><form id="passwordForm" class="security-form"><label>Current Password<input id="currentPassword" type="password" autocomplete="current-password" required></label><label>New Password<input id="newPassword" type="password" minlength="8" autocomplete="new-password" required></label><label>Confirm New Password<input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required></label><button type="button" class="save" onclick="changePassword()">Change Password</button><div id="passwordMsg" class="msg"></div></form></div></section>
+</main></div>
+<div id="appModal" class="modal-overlay" aria-hidden="true" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-x" type="button" aria-label="Close" onclick="closeModal()">×</button>
+    <div class="modal-eyebrow">SRVM ADMIN</div>
+    <h2 id="modalTitle">Add</h2>
+    <div id="modalBody"></div>
+    <div id="modalActions" class="modal-actions"></div>
+  </div>
+</div>
+<script src="/admin/admin.js"></script></body></html>
