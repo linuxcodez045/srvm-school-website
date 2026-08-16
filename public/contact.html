@@ -1,1 +1,26 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Contact the School | SRVM</title><link rel="stylesheet" href="/assets/form.css"></head><body><main class="wrap"><a class="back" href="/">← Back to school website</a><div class="form-card"><div class="eyebrow">SHREE RAM VIDHYA MANDIR · ADMISSIONS</div><h1>Talk to our school team.</h1><p>Send your details and message. It will appear directly inside the admin panel.</p><form id="form"><div><label>Your Name *</label><input name="name" required></div><div><label>Phone *</label><input name="phone" type="tel" required></div><div><label>Email</label><input name="email" type="email"></div><div><label>Student Name</label><input name="studentName"></div><div class="full"><label>Address</label><textarea name="address"></textarea></div><div class="full"><label>Your Message *</label><textarea name="message" required></textarea></div><button class="submit">Send Message →</button><div id="msg" class="msg"></div></form></div></main><script>document.getElementById("form").addEventListener("submit",async e=>{e.preventDefault();const form=e.currentTarget,msg=document.getElementById("msg"),button=form.querySelector("button[type=submit]");msg.textContent="Submitting…";button.disabled=true;try{const r=await fetch("/api/contacts",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(Object.fromEntries(new FormData(form)))});const j=await r.json();if(!r.ok)throw new Error(j.error||"Could not submit.");form.reset();msg.textContent="✓ Thank you. Your message has been sent to the school.";msg.style.color="#177245"}catch(err){msg.textContent=err.message||"Could not submit.";msg.style.color="#a22"}finally{button.disabled=false}})</script></body></html>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Contact the School | SRVM</title><link rel="stylesheet" href="/assets/form.css"></head><body><main class="wrap"><a class="back" href="/">← Back to school website</a><div class="form-card"><div class="eyebrow">SHREE RAM VIDHYA MANDIR · CONTACT</div><h1>Talk to our school team.</h1><p>Send your details and message. It will appear directly inside the admin panel.</p><form id="form"><div><label>Your Name *</label><input name="name" required></div><div><label>Phone *</label><input name="phone" type="tel" required></div><div><label>Email</label><input name="email" type="email"></div><div><label>Student Name</label><input name="studentName"></div><div class="full"><label>Address</label><textarea name="address"></textarea></div><div class="full"><label>Your Message *</label><textarea name="message" required></textarea></div><button type="submit" class="submit">Send Message →</button><div id="msg" class="msg"></div></form></div></main><script>
+async function fetchJson(url,options={},timeoutMs=15000){
+ const controller=new AbortController();
+ const timer=setTimeout(()=>controller.abort(),timeoutMs);
+ try{
+  const r=await fetch(url,{...options,signal:controller.signal,cache:"no-store"});
+  const text=await r.text();let data={};
+  try{data=text?JSON.parse(text):{}}catch{data={error:text||"Server returned an invalid response."};}
+  if(!r.ok)throw new Error(data.error||`Request failed (${r.status})`);
+  return data;
+ }catch(e){if(e.name==="AbortError")throw new Error("The server took too long to respond. Please try again.");throw e}
+ finally{clearTimeout(timer)}
+}
+
+document.getElementById("form").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const form=e.currentTarget,msg=document.getElementById("msg"),button=form.querySelector("button[type=submit]");
+ msg.textContent="Submitting…";msg.style.color="";button.disabled=true;
+ try{
+  const data=Object.fromEntries(new FormData(form));
+  await fetchJson("/api/contacts",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+  form.reset();msg.textContent="✓ Thank you. Your message has been sent to the school.";msg.style.color="#177245";
+ }catch(err){msg.textContent=err.message||"Could not submit. Please try again.";msg.style.color="#a22";console.error("Contact submission error:",err)}
+ finally{button.disabled=false}
+});
+</script></body></html>
